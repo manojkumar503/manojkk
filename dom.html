@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button Color Change</title>
+    <style>
+        #btn1 {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        #btn2 {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="btn1">Button 1</button>
+    <button id="btn2">Click Me</button>
+
+    <script>
+        document.getElementById("btn2").onclick = function() {
+            document.getElementById("btn1").style.backgroundColor = "green";
+        };
+    </script>
+
+</body>
+</html>

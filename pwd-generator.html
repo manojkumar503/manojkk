@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+
+<div class="row">
+    <input id="upper" type="checkbox" checked/>
+    <label>include A-Z (uppercase)</label>
+</div>
+
+<div class="row">
+    <input id="lower" type="checkbox" checked/>
+    <label>include a-z (lowercase)</label>
+</div>
+
+<div class="row">
+    <input id="numbers" type="checkbox" checked/>
+    <label>include 0-9 (Numbers)</label>
+</div>
+
+<div class="row">
+    <input id="symbols" type="checkbox" checked/>
+    <label>include @ # $ (symbols)</label>
+</div>
+
+<div class="row">
+    <label>Length:</label>
+    <input id="length" type="number">
+</div>
+
+<div class="row">
+    <input id="output" class="result" placeholder="Your password will appear here!">
+</div>
+
+<div class="controls">
+    <button id="generate">Generate</button>
+    <button id="clear">clear</button>
+</div>
+
+<script>
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const nums = '0123456789';
+    const symbols = '@#$';
+
+    function generate() {
+        const parts = [];
+
+        if (document.getElementById("upper").checked) parts.push(upper);
+        if (document.getElementById("lower").checked) parts.push(lower);
+        if (document.getElementById("numbers").checked) parts.push(nums);
+        if (document.getElementById("symbols").checked) parts.push(symbols);
+
+        const length = parseInt(document.getElementById("length").value);
+
+        if (isNaN(length) || length <= 0) {
+            alert("Please enter a valid password length.");
+            return;
+        }
+
+        if (parts.length === 0) {
+            alert("Please select at least one character set.");
+            return;
+        }
+
+        const charset = parts.join('');
+        let out = '';
+
+        function randomIndex(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        for (let i = 0; i < length; i++) {
+            out += charset[randomIndex(charset.length)];
+        }
+
+        document.getElementById("output").value = out; // display result
+    }
+
+    document.getElementById("generate").addEventListener('click', generate);
+
+    document.getElementById("clear").addEventListener('click', () => {
+        document.getElementById("output").value = '';
+    });
+</script>
+
+</body>
+</html>
